@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<addon addon_id="underageUserNotice" title="[kiror] Underage user notice" version_string="0.0" version_id="0" url="https://github.com/adlerosn/" install_callback_class="" install_callback_method="" uninstall_callback_class="" uninstall_callback_method="">
+  <admin_navigation/>
+  <admin_permissions/>
+  <admin_style_properties/>
+  <admin_templates/>
+  <admin_template_modifications/>
+  <code_events/>
+  <code_event_listeners/>
+  <cron/>
+  <email_templates/>
+  <email_template_modifications/>
+  <optiongroups>
+    <option option_id="ageOfMajorityToDecideIfUnderageOrNot" edit_format="spinbox" data_type="positive_integer" can_backup="1">
+      <default_value>18</default_value>
+      <edit_format_params></edit_format_params>
+      <sub_options></sub_options>
+      <relation group_id="usersAndRegistration" display_order="111"/>
+    </option>
+  </optiongroups>
+  <permissions>
+    <permission_groups/>
+    <permissions/>
+    <interface_groups/>
+  </permissions>
+  <phrases>
+    <phrase title="option_ageOfMajorityToDecideIfUnderageOrNot" version_id="0" version_string="0.0"><![CDATA[Age of majority]]></phrase>
+    <phrase title="option_ageOfMajorityToDecideIfUnderageOrNot_explain" version_id="0" version_string="0.0"><![CDATA[The age of majority is the threshold of adulthood as recognized or declared in law. It is the moment when minors cease to be considered children and assume legal control over their persons, actions, and decisions, thus terminating the control and legal responsibilities of their parents or guardian over them. Most countries set majority at 18.]]></phrase>
+    <phrase title="underage" version_id="0" version_string="0.0"><![CDATA[Underage]]></phrase>
+    <phrase title="underage_comma_space" version_id="0" version_string="0.0"><![CDATA[Underage, ]]></phrase>
+  </phrases>
+  <route_prefixes/>
+  <style_properties/>
+  <templates/>
+  <public_template_modifications>
+    <modification template="member_card" modification_key="addunderagenoticemembercard" description="" execution_order="10" enabled="1" action="str_replace">
+      <find><![CDATA[<div class="userBlurb">]]></find>
+      <replace><![CDATA[$0 <xen:if is="!{$user.age} OR {$user.age} < {$xenOptions.ageOfMajorityToDecideIfUnderageOrNot}">{xen:phrase underage_comma_space}</xen:if>]]></replace>
+    </modification>
+    <modification template="member_view" modification_key="addunderagenoticememberlist" description="" execution_order="10" enabled="1" action="str_replace">
+      <find><![CDATA[<p class="userBlurb">]]></find>
+      <replace><![CDATA[$0 <xen:if is="!{$user.age} OR {$user.age} < {$xenOptions.ageOfMajorityToDecideIfUnderageOrNot}">{xen:phrase underage_comma_space}</xen:if>]]></replace>
+    </modification>
+  </public_template_modifications>
+  <bb_code_media_sites/>
+  <bb_codes/>
+</addon>
